@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CredPulse - Autonomous Credit & Cashflow Underwriting Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       LAYER 1: STICKY NAVIGATION BAR
+       ========================================================================= -->
+  <header class="navbar" id="topNavbar">
+    <div class="nav-container">
+      <a href="#" class="brand-logo">
+        <div class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">CredPulse</span>
+          <span class="logo-badge">Coppell '26 • Credit</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#comparison">Why Legacy Fails</a>
+        <a href="#calculator">Credit Engine</a>
+        <a href="#debt-optimizer">Debt Planner</a>
+        <a href="#methodology">Methodology</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#calculator" class="btn-nav-primary">Launch Simulator</a>
+        <button id="printReportBtn" class="btn-nav-outline" title="Print Executive Summary">Print PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       LAYER 2: HERO SECTION (PROPER HOMEPAGE START)
+       ========================================================================= -->
+  <section class="hero-section" id="overview">
+    <div class="hero-container">
+      <div class="hero-pill">
+        <span class="pill-dot"></span>
+        <span>Coppell Hackathon 1 • Track: Credit (Personal Finance & Cashflow Underwriting)</span>
+      </div>
+
+      <h1 class="hero-title">
+        Real-time credit underwriting for the <span class="gradient-text">independent workforce</span>.
+      </h1>
+
+      <p class="hero-description">
+        Over 64 million freelancers, creators, and gig-workers are penalized by traditional FICO scoring because they lack multi-year debt histories. CredPulse replaces static credit checks with real-time cashflow velocity, volatility dampening, and liquid reserve underwriting.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#calculator" class="btn-hero-primary">
+          <span>Open Underwriting Simulator</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <a href="#debt-optimizer" class="btn-hero-secondary">
+          <span>Explore Debt Avalanche Engine</span>
+        </a>
+      </div>
+
+      <!-- Trust Metrics Strip -->
+      <div class="hero-metrics-strip">
+        <div class="metric-block">
+          <span class="m-number">$0</span>
+          <span class="m-desc">Inquiry Penalties (Zero Credit Damage)</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-block">
+          <span class="m-number">&lt;25ms</span>
+          <span class="m-desc">Algorithmic Decision Latency</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-block">
+          <span class="m-number">RACM</span>
+          <span class="m-desc">Risk-Adjusted Margin</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-block">
+          <span class="m-number">100%</span>
+          <span class="m-desc">Client-Side Private Execution</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       LAYER 3: THE STRUCTURAL PROBLEM VS. CREDPULSE SOLUTION
+       ========================================================================= -->
+  <section class="section-container" id="comparison">
+    <div class="section-header text-center">
+      <span class="section-eyebrow">The Structural Market Gap</span>
+      <h2 class="section-heading">Why Legacy Bureau Scoring Fails 64 Million Modern Earners</h2>
+      <p class="section-subheading">Conventional credit bureaus were built in 1989 for corporate 9-to-5 employees with bi-weekly paystubs. Today's dynamic gig economy requires a modern cashflow underwriting paradigm.</p>
+    </div>
+
+    <div class="comparison-grid">
+      <!-- Legacy Bureau Card -->
+      <div class="comp-card legacy-card">
+        <div class="comp-card-header">
+          <div class="comp-icon red-icon">✕</div>
+          <div>
+            <h3 class="comp-title">Traditional Bureau (FICO / Vantage)</h3>
+            <span class="comp-subtitle">Backward-Looking Debt Bias</span>
+          </div>
+        </div>
+        <ul class="comp-list">
+          <li><strong>Penalizes Debt Avoidance:</strong> If you never took high-interest credit cards or loans, you are labeled "unscorable" or given a thin-file subprime score.</li>
+          <li><strong>Fails Variable Inflows:</strong> Treats any freelance income fluctuation as an automatic default warning, ignoring net monthly profit margins.</li>
+          <li><strong>Punishes Rate Shopping:</strong> Imposes hard inquiry penalties (knocking 5 to 10 points off your score) every time you seek credit.</li>
+          <li><strong>Black Box Rejections:</strong> Provides vague adverse action letters with zero actionable mathematical guidance on how to fix your limits.</li>
+        </ul>
+      </div>
+
+      <!-- CredPulse Solution Card -->
+      <div class="comp-card credpulse-card">
+        <div class="comp-card-header">
+          <div class="comp-icon green-icon">✓</div>
+          <div>
+            <h3 class="comp-title">CredPulse Underwriting Engine</h3>
+            <span class="comp-subtitle">Forward-Looking Cashflow Velocity</span>
+          </div>
+        </div>
+        <ul class="comp-list">
+          <li><strong>Rewards Positive Inflow:</strong> Evaluates actual cash entering your accounts over 30/60/90 days, approving prime limits without credit file prerequisites.</li>
+          <li><strong>Volatility-Damped Floor:</strong> Calculates the 95th percentile worst-case earnings floor so safe credit limits remain secure even during dry spells.</li>
+          <li><strong>Zero Score Harm:</strong> Evaluates open banking read-only cash telemetry with absolutely zero hard credit inquiries or score deductions.</li>
+          <li><strong>Transparent Math Rationale:</strong> Tells you exactly what your cashflow supports, why your limit is sized at $X,000, and how to expand capacity.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       LAYER 4: INTERACTIVE TOOL 1 - CREDIT ASSESSMENT & CASHFLOW ENGINE
+       ========================================================================= -->
+  <section class="section-container bg-elevated" id="calculator">
+    <div class="section-header">
+      <span class="section-eyebrow">Interactive FinTech Engine</span>
+      <h2 class="section-heading">1. Real-Time Cashflow Credit Evaluator</h2>
+      <p class="section-subheading">Adjust your real-world financial inputs below. The mathematical underwriting engine updates your alternative score, risk tier, and maximum safe borrowing line in real time.</p>
+    </div>
+
+    <div class="tool-layout">
+      <!-- Input Column -->
+      <div class="panel-box input-panel">
+        <div class="panel-top-row">
+          <h3 class="panel-heading">Monthly Financial Telemetry</h3>
+          <span class="pill-info">Live Two-Way Sync</span>
+        </div>
+
+        <!-- Inflow / Income -->
+        <div class="field-block">
+          <div class="field-meta">
+            <label for="incomeInput">Average Monthly Inflow / Gross Inflows</label>
+            <div class="numeric-input-wrap">
+              <span class="currency-tag">$</span>
+              <input type="number" id="incomeInput" value="5200" min="500" max="30000" step="100">
+            </div>
+          </div>
+          <input type="range" id="incomeRange" min="500" max="25000" step="100" value="5200" class="custom-slider">
+          <div class="field-annotation">All verified client payouts, freelance platforms, and deposits.</div>
+        </div>
+
+        <!-- Income Volatility Rate -->
+        <div class="field-block">
+          <div class="field-meta">
+            <label for="volatilityInput">Income Volatility & Fluctuation</label>
+            <div class="numeric-input-wrap">
+              <span class="currency-tag">%</span>
+              <input type="number" id="volatilityInput" value="12" min="0" max="60" step="1">
+            </div>
+          </div>
+          <input type="range" id="volatilityRange" min="0" max="60" step="1" value="12" class="custom-slider">
+          <div class="field-annotation">Standard deviation of monthly contract variance / seasonal fluctuation.</div>
+        </div>
+
+        <!-- Essential Living Expenses -->
+        <div class="field-block">
+          <div class="field-meta">
+            <label for="expensesInput">Non-Discretionary Living Expenses</label>
+            <div class="numeric-input-wrap">
+              <span class="currency-tag">$</span>
+              <input type="number" id="expensesInput" value="2300" min="300" max="20000" step="50">
+            </div>
+          </div>
+          <input type="range" id="expensesRange" min="300" max="15000" step="50" value="2300" class="custom-slider">
+          <div class="field-annotation">Rent/mortgage, utilities, food, essential health coverage.</div>
+        </div>
+
+        <!-- Existing Debt Obligations -->
+        <div class="field-block">
+          <div class="field-meta">
+            <label for="debtInput">Current Monthly Debt Servicing</label>
+            <div class="numeric-input-wrap">
+              <span class="currency-tag">$</span>
+              <input type="number" id="debtInput" value="420" min="0" max="10000" step="20">
+            </div>
+          </div>
+          <input type="range" id="debtRange" min="0" max="6000" step="20" value="420" class="custom-slider">
+          <div class="field-annotation">Minimum payments on existing credit cards, auto loans, or student debt.</div>
+        </div>
+
+        <!-- Liquid Cash Reserves -->
+        <div class="field-block">
+          <div class="field-meta">
+            <label for="savingsInput">Accessible Cash Savings & Liquid Cushion</label>
+            <div class="numeric-input-wrap">
+              <span class="currency-tag">$</span>
+              <input type="number" id="savingsInput" value="8500" min="0" max="100000" step="250">
+            </div>
+          </div>
+          <input type="range" id="savingsRange" min="0" max="50000" step="250" value="8500" class="custom-slider">
+          <div class="field-annotation">Total emergency reserve across checking and liquid savings.</div>
+        </div>
+
+        <!-- Scenario Tester Presets -->
+        <div class="presets-container">
+          <span class="presets-title">Load Evaluated Applicant Profile:</span>
+          <div class="presets-buttons">
+            <button class="btn-preset" id="presetFreelancer">Applicant A (Prime Freelance)</button>
+            <button class="btn-preset" id="presetHighDebt">Applicant B (Stressed Inflow)</button>
+            <button class="btn-preset" id="presetSaver">High-Liquidity Saver</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Output Results Column -->
+      <div class="panel-box result-panel">
+        <div class="panel-top-row">
+          <h3 class="panel-heading">Underwriting Solvency Verdict</h3>
+          <span class="badge-tier" id="scoreBadge">Prime Tier</span>
+        </div>
+
+        <!-- Score Showcase -->
+        <div class="score-card-hero">
+          <div class="score-big-group">
+            <span class="score-digit" id="calculatedScore">745</span>
+            <span class="score-denominator">/ 850</span>
+          </div>
+          <div class="score-meter-bg">
+            <div class="score-meter-fill" id="scoreFill" style="width: 81%;"></div>
+          </div>
+          <p class="score-tier-explanation" id="scoreSummary">
+            Approved for prime revolving credit. Healthy liquidity buffer counteracts thin-file legacy dropouts.
+          </p>
+        </div>
+
+        <!-- 4 Key Telemetry Metrics -->
+        <div class="telemetry-grid">
+          <div class="telemetry-box">
+            <span class="t-label">Safe Credit Limit</span>
+            <span class="t-value text-green" id="kpiMaxCredit">$5,790</span>
+            <span class="t-hint">Max safe credit line</span>
+          </div>
+          <div class="telemetry-box">
+            <span class="t-label">Risk-Adjusted RACM</span>
+            <span class="t-value text-green" id="kpiFreeCash">$1,680 / mo</span>
+            <span class="t-hint">Stressed monthly surplus</span>
+          </div>
+          <div class="telemetry-box">
+            <span class="t-label">Debt-to-Income (DTI)</span>
+            <span class="t-value text-blue" id="kpiDTI">4.8%</span>
+            <span class="t-hint">Under 36% benchmark</span>
+          </div>
+          <div class="telemetry-box">
+            <span class="t-label">Cash Buffer Runway</span>
+            <span class="t-value text-purple" id="kpiRunway">3.6 months</span>
+            <span class="t-hint">Uninterrupted burn cover</span>
+          </div>
+        </div>
+
+        <!-- Underwriter Decision Analysis -->
+        <div class="underwriter-rationale">
+          <div class="rationale-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <span>Underwriter Audit Rationale</span>
+          </div>
+          <p class="rationale-text" id="analysisText">
+            The applicant maintains a verified free cashflow margin of $2,480 per month. With a conservative debt-to-income ratio of 8.1% and a liquid runway exceeding 3.1 months, the applicant poses minimal short-term default risk and qualifies for prime unsecured financing without historical credit card requirements.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       LAYER 5: INTERACTIVE TOOL 2 - AUTONOMOUS DEBT PAYOFF PLANNER
+       ========================================================================= -->
+  <section class="section-container" id="debt-optimizer">
+    <div class="section-header">
+      <span class="section-eyebrow">Personal Finance & Debt Optimization</span>
+      <h2 class="section-heading">2. Autonomous Debt Payoff Planner</h2>
+      <p class="section-subheading">Managing existing high-interest liabilities is the fastest way to expand future borrowing capacity. Add your debts below to see the exact payoff sequence and interest savings.</p>
+    </div>
+
+    <div class="stacked-debt-layout">
+      <!-- Active Liabilities Table & Add Form -->
+      <div class="panel-box">
+        <div class="panel-top-row">
+          <h3 class="panel-heading">Active Liabilities Registry</h3>
+          <span class="pill-counter" id="debtCountTag">3 Liabilities Registered</span>
+        </div>
+
+        <div class="table-container">
+          <table class="styled-table" id="debtsTable">
+            <thead>
+              <tr>
+                <th>Liability / Card</th>
+                <th>Balance</th>
+                <th>APR (%)</th>
+                <th>Min Payment</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="debtsTbody">
+              <!-- Dynamically Populated by app.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Direct In-Page Add Form (Zero Popups) -->
+        <div class="inpage-add-card">
+          <h4 class="inpage-title">+ Register Another Debt / Credit Line</h4>
+          <div class="inpage-inputs-grid">
+            <div class="input-col">
+              <label>Debt Name</label>
+              <input type="text" id="newDebtName" placeholder="e.g. Retail Store Card" class="text-input">
+            </div>
+            <div class="input-col">
+              <label>Balance ($)</label>
+              <input type="number" id="newDebtBalance" placeholder="2500" min="10" step="50" class="text-input">
+            </div>
+            <div class="input-col">
+              <label>APR (%)</label>
+              <input type="number" id="newDebtApr" placeholder="24.9" min="0" max="100" step="0.1" class="text-input">
+            </div>
+            <div class="input-col">
+              <label>Min Payment ($)</label>
+              <input type="number" id="newDebtMin" placeholder="80" min="5" step="5" class="text-input">
+            </div>
+            <div class="input-col-btn">
+              <button id="addDebtBtn" class="btn-add-debt">+ Add to Plan</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Strategy Comparison & Payoff Schedule (Full-Width Horizontal Box Below) -->
+      <div class="panel-box optimizer-horizontal-panel">
+        <div class="panel-top-row">
+          <h3 class="panel-heading">Algorithmic Payoff Optimizer</h3>
+          <span class="pill-info">Dynamic Math Model</span>
+        </div>
+
+        <!-- Top Controls Row (Strategy Selector + Accelerator Slider horizontally side by side) -->
+        <div class="optimizer-controls-row">
+          <!-- Strategy Selector Radios -->
+          <div class="strategy-cards-row">
+            <div class="strat-choice active" id="labelAvalanche">
+              <input type="radio" name="payoffStrategy" value="avalanche" checked id="radioAvalanche">
+              <div>
+                <strong>Mathematical Avalanche</strong>
+                <span>Target highest APR first to minimize total interest paid.</span>
+              </div>
+            </div>
+            <div class="strat-choice" id="labelSnowball">
+              <input type="radio" name="payoffStrategy" value="snowball" id="radioSnowball">
+              <div>
+                <strong>Psychological Snowball</strong>
+                <span>Target smallest balance first to build fast momentum.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accelerator Slider -->
+          <div class="accelerator-box">
+            <div class="acc-meta">
+              <label for="extraPayRange">Monthly Accelerated Repayment (Extra Cash):</label>
+              <span class="acc-display text-green" id="extraPayValue">+$200 / mo</span>
+            </div>
+            <input type="range" id="extraPayRange" min="0" max="1500" step="25" value="200" class="custom-slider">
+            <div class="acc-subtext">Every extra dollar is automatically channeled to the top-priority liability.</div>
+          </div>
+        </div>
+
+        <!-- Payoff KPI Cards (Spanning 4 columns horizontally) -->
+        <div class="payoff-kpis">
+          <div class="p-kpi">
+            <span class="pk-label">Total Debt Balance</span>
+            <span class="pk-val" id="resTotalDebt">$16,700</span>
+          </div>
+          <div class="p-kpi">
+            <span class="pk-label">Debt-Free In</span>
+            <span class="pk-val text-blue" id="resMonths">24 Months</span>
+          </div>
+          <div class="p-kpi">
+            <span class="pk-label">Total Interest Paid</span>
+            <span class="pk-val text-amber" id="resTotalInterest">$1,940</span>
+          </div>
+          <div class="p-kpi">
+            <span class="pk-label">Interest Saved</span>
+            <span class="pk-val text-green" id="resInterestSaved">$2,860 Saved</span>
+          </div>
+        </div>
+
+        <!-- Sequential Payoff Roadmap -->
+        <div class="roadmap-box">
+          <h4 class="roadmap-title">Sequential Payoff Roadmap</h4>
+          <ol class="roadmap-list" id="payoffSequenceList">
+            <!-- Dynamically populated -->
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       LAYER 6: UNDERWRITING METHODOLOGY & RISK FORMULAS
+       ========================================================================= -->
+  <section class="section-container bg-elevated" id="methodology">
+    <div class="section-header text-center">
+      <span class="section-eyebrow">Engineering Rigor & Math</span>
+      <h2 class="section-heading">How the CredPulse Underwriting Model Works</h2>
+      <p class="section-subheading">Our scoring framework replaces arbitrary black-box algorithms with transparent, mathematically deterministic risk formulas.</p>
+    </div>
+
+    <div class="methodology-grid">
+      <div class="method-card">
+        <div class="method-num">01</div>
+        <h3 class="method-name">Cashflow Velocity (30% Weight)</h3>
+        <p class="method-desc">Measures the volume and consistency of net funds entering versus exiting the account over 30, 60, and 90-day intervals. Ratios above 1.2 indicate organic debt-servicing capacity.</p>
+        <div class="method-formula">Velocity = Verified Inflows / Total Monthly Disbursements</div>
+      </div>
+
+      <div class="method-card">
+        <div class="method-num">02</div>
+        <h3 class="method-name">Volatility Floor (25% Weight)</h3>
+        <p class="method-desc">Calculates monthly income coefficient of variation to size a conservative stressed baseline earning floor, protecting borrowers and lenders during low-earning months.</p>
+        <div class="method-formula">Floor = Monthly_Income * (1 - Volatility_Rate)</div>
+      </div>
+
+      <div class="method-card">
+        <div class="method-num">03</div>
+        <h3 class="method-name">Risk-Adjusted Margin (25% Weight)</h3>
+        <p class="method-desc">Traditional DTI ignores non-discretionary survival costs. RACM isolates essential living expenses (rent, food, utilities) to ensure organic surplus remains before extending credit.</p>
+        <div class="method-formula">RACM = Income_floor - Living_Costs - Debt_Payments</div>
+      </div>
+
+      <div class="method-card">
+        <div class="method-num">04</div>
+        <h3 class="method-name">Liquidity Runway (20% Weight)</h3>
+        <p class="method-desc">Measures how many months the applicant can survive with zero income while continuing to service debt commitments. A larger liquid buffer improves resilience to disruptions.</p>
+        <div class="method-formula">Runway = Liquid Savings / (Living_Costs + Debt_Payments)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       LAYER 7: FAQ & HACKATHON ENTRY DETAILS
+       ========================================================================= -->
+  <section class="section-container" id="faq">
+    <div class="section-header">
+      <span class="section-eyebrow">Frequently Asked Questions</span>
+      <h2 class="section-heading">Frequently Asked Questions & Submission Details</h2>
+    </div>
+
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h4 class="faq-q">Which category is this project entered in?</h4>
+        <p class="faq-a">This project is submitted to <strong>Coppell Hackathon 1</strong> in the <strong>Credit</strong> category (spanning alternative credit underwriting, cashflow scoring, and personal debt elimination).</p>
+      </div>
+      <div class="faq-item">
+        <h4 class="faq-q">Does checking my score on CredPulse hurt my credit?</h4>
+        <p class="faq-a">No. Traditional hard inquiries dock 5 to 10 points from your bureau score. CredPulse evaluates read-only cashflow telemetry with zero inquiry penalties.</p>
+      </div>
+      <div class="faq-item">
+        <h4 class="faq-q">Is CredPulse free and open source?</h4>
+        <p class="faq-a">Yes. CredPulse is 100% free and open-source under the MIT license, built as a transparent, client-side public financial tool that never stores or sells your personal financial data.</p>
+      </div>
+      <div class="faq-item">
+        <h4 class="faq-q">Why is this better than traditional FICO?</h4>
+        <p class="faq-a">Traditional FICO only looks backward at debt history. CredPulse evaluates real-time cashflow velocity, income stability, and liquid savings, opening fair credit access to thin-file and gig workers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       LAYER 8: FOOTER
+       ========================================================================= -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="brand-logo footer-logo">
+          <div class="logo-icon small-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+          </div>
+          <span class="logo-title">CredPulse</span>
+        </div>
+        <p class="footer-tagline">Alternative credit scoring and real-time cashflow underwriting engine for thin-file earners and the gig economy.</p>
+      </div>
+
+      <div class="footer-col">
+        <h5 class="footer-heading">Navigation</h5>
+        <ul class="footer-links">
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#comparison">Why Legacy Fails</a></li>
+          <li><a href="#calculator">Credit Engine</a></li>
+          <li><a href="#debt-optimizer">Debt Planner</a></li>
+          <li><a href="#methodology">Methodology</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5 class="footer-heading">Competition Info</h5>
+        <ul class="footer-links">
+          <li><strong>Hackathon:</strong> Coppell Hackathon 1</li>
+          <li><strong>Section:</strong> Credit</li>
+          <li><strong>Tech Stack:</strong> HTML5, CSS3, JavaScript</li>
+          <li><strong>Architecture:</strong> 100% Client-Side Private Engine</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-container bottom-inner">
+        <span>© 2026 CredPulse. All rights reserved. Created for Coppell Hackathon 1.</span>
+        <span>Built with clean Vanilla Web Technologies • Zero Heavy Dependencies</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
