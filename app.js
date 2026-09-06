@@ -57,6 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const newDebtApr = document.getElementById('newDebtApr');
   const newDebtMin = document.getElementById('newDebtMin');
   const addDebtBtn = document.getElementById('addDebtBtn');
+  const syncDebtBtn = document.getElementById('syncDebtBtn');
+  const syncMinPayTotal = document.getElementById('syncMinPayTotal');
+  const feedbackText = document.getElementById('feedbackText');
 
   // Strategy & Extra Pay
   const labelAvalanche = document.getElementById('labelAvalanche');
@@ -123,35 +126,46 @@ document.addEventListener('DOMContentLoaded', () => {
     // Safe_Credit_Limit = RACM > 0 ? (RACM * 3.0) + (Liquid_Savings * 0.10) : 0
     const maxCredit = racm > 0 ? Math.round((racm * 3.0) + (savings * 0.10)) : 0;
 
-    // 3. Four-Pillar Composite Scoring (0 to 100 normalized)
+    // 3. Four-Pillar Deterministic Scoring (0 to 100 normalized)
     // Pillar 1: Cashflow Velocity & Net Inflow (30% weight)
     const inflowRatio = income / Math.max(1, monthlyBurn);
-    let velocityScore = Math.min(100, Math.max(10, Math.round((inflowRatio / 2.0) * 88)));
-    if (inflowRatio < 1.0) velocityScore = Math.min(velocityScore, 30);
+    let velocityScore;
+    if (inflowRatio >= 2.0) {
+      velocityScore = Math.min(100, Math.round(88 + Math.min(12, (inflowRatio - 2.0) * 12)));
+    } else if (inflowRatio >= 1.2) {
+      velocityScore = Math.round(60 + ((inflowRatio - 1.2) / 0.8) * 28);
+    } else if (inflowRatio >= 1.0) {
+      velocityScore = Math.round(20 + ((inflowRatio - 1.0) / 0.2) * 20);
+    } else {
+      velocityScore = Math.max(10, Math.round(inflowRatio * 20));
+    }
 
     // Pillar 2: Income Volatility Floor Sizing (25% weight)
-    let volatilityScore = Math.min(100, Math.max(10, Math.round(100 - (volatility * 1.85))));
+    let volatilityScore;
+    if (volatility <= 15) {
+      volatilityScore = Math.round(100 - (volatility * 1.0));
+    } else {
+      volatilityScore = Math.max(10, Math.round(85 - ((volatility - 15) / 20) * 50));
+    }
 
     // Pillar 3: Risk-Adjusted Cashflow Margin (RACM) (25% weight)
     let racmScore = 10;
     if (racm > 0) {
-      racmScore = Math.min(100, Math.max(15, Math.round((racm / Math.max(1, expenses)) * 96)));
+      racmScore = Math.min(100, Math.max(10, Math.round((racm / Math.max(1, expenses)) * 96.15)));
     }
 
     // Pillar 4: Emergency Liquidity Reserve Runway (20% weight)
-    let runwayScore = Math.min(100, Math.max(10, Math.round(Math.min(6, runway) * 21)));
+    let runwayScore;
+    if (runway >= 6.0) {
+      runwayScore = 100;
+    } else {
+      runwayScore = Math.max(10, Math.min(100, Math.round(runway * 21.0)));
+    }
 
-    // Composite Factor & 300-850 Mapping
+    // Composite Factor & 300-850 Credit Score Mapping
     const compositeFactor = (velocityScore * 0.30) + (volatilityScore * 0.25) + (racmScore * 0.25) + (runwayScore * 0.20);
     let score = Math.round(300 + (compositeFactor / 100) * 550);
     score = Math.max(300, Math.min(850, score));
-
-    // Special exact calibration for Applicant A and Applicant B presets
-    if (income === 4200 && volatility === 10 && expenses === 1900 && debt === 200 && savings === 7500) {
-      score = 768; // Applicant A exact Prime Tier score
-    } else if (income === 6500 && volatility === 35 && expenses === 4800 && debt === 1100 && savings === 800) {
-      score = 422; // Applicant B exact High Risk score
-    }
 
     // Determine Tier & Badge
     let tier = 'Fair';
@@ -259,7 +273,43 @@ document.addEventListener('DOMContentLoaded', () => {
         state.debts = state.debts.filter(item => item.id !== id);
         renderDebtsTable();
         calculateDebtPayoff();
+        updateDebtSyncDisplay();
       });
+    });
+
+    updateDebtSyncDisplay();
+  }
+
+  function updateDebtSyncDisplay() {
+    const totalMinPay = state.debts.reduce((sum, d) => sum + d.minPay, 0);
+    if (syncMinPayTotal) {
+      syncMinPayTotal.textContent = totalMinPay;
+    }
+    if (feedbackText) {
+      if (state.debts.length > 0) {
+        const highestAprDebt = [...state.debts].sort((a, b) => b.apr - a.apr)[0];
+        const capacityGain = Math.round(highestAprDebt.minPay * 3.0);
+        feedbackText.innerHTML = `Retiring your highest-APR debt (<strong>${escapeHtml(highestAprDebt.name)}</strong> @ $${highestAprDebt.minPay}/mo) will free $${highestAprDebt.minPay} in monthly RACM, expanding safe borrowing capacity by <strong>+$${capacityGain.toLocaleString()}</strong> under the 3.0x multiplier.`;
+      } else {
+        feedbackText.textContent = 'All liabilities eliminated! Your Risk-Adjusted Cashflow Margin (RACM) is fully maximized.';
+      }
+    }
+  }
+
+  if (syncDebtBtn) {
+    syncDebtBtn.addEventListener('click', () => {
+      const totalMinPay = state.debts.reduce((sum, d) => sum + d.minPay, 0);
+      state.debt = totalMinPay;
+      debtInput.value = totalMinPay;
+      debtRange.value = totalMinPay;
+      runCalculations();
+
+      syncDebtBtn.textContent = `✓ Synced ($${totalMinPay}/mo to Evaluator)`;
+      syncDebtBtn.style.background = 'rgba(16, 185, 129, 0.25)';
+      setTimeout(() => {
+        syncDebtBtn.innerHTML = `⚡ Sync to Credit Engine ($<span id="syncMinPayTotal">${totalMinPay}</span>/mo)`;
+        syncDebtBtn.style.background = '';
+      }, 1600);
     });
   }
 
@@ -291,6 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderDebtsTable();
     calculateDebtPayoff();
+    updateDebtSyncDisplay();
   });
 
   // Strategy Toggle

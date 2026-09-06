@@ -902,6 +902,63 @@ body {
 }
 
 /* Stacked Debt Optimizer Layout */
+.panel-subcaption {
+  display: block;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+.sync-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-sync-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: var(--emerald);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-sync-action:hover {
+  background: rgba(16, 185, 129, 0.22);
+  border-color: var(--emerald);
+  transform: translateY(-1px);
+}
+
+.capacity-feedback-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  margin: 16px 0 20px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.capacity-feedback-card .feedback-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.capacity-feedback-card strong {
+  color: var(--emerald);
+}
+
 .stacked-debt-layout {
   display: flex;
   flex-direction: column;

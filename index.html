@@ -80,8 +80,8 @@
         </div>
         <div class="metric-divider"></div>
         <div class="metric-block">
-          <span class="m-number">&lt;25ms</span>
-          <span class="m-desc">Algorithmic Decision Latency</span>
+          <span class="m-number">Deterministic</span>
+          <span class="m-desc">Pure Client-Side Math</span>
         </div>
         <div class="metric-divider"></div>
         <div class="metric-block">
@@ -311,8 +311,25 @@
       <!-- Active Liabilities Table & Add Form -->
       <div class="panel-box">
         <div class="panel-top-row">
-          <h3 class="panel-heading">Active Liabilities Registry</h3>
-          <span class="pill-counter" id="debtCountTag">3 Liabilities Registered</span>
+          <div>
+            <h3 class="panel-heading">Active Liabilities Registry</h3>
+            <span class="panel-subcaption">Debt reduction directly expands Risk-Adjusted Margin (RACM)</span>
+          </div>
+          <div class="sync-actions-group">
+            <button id="syncDebtBtn" class="btn-sync-action" title="Apply active debt servicing to Credit Engine above">
+              ⚡ Sync to Credit Engine ($<span id="syncMinPayTotal">410</span>/mo)
+            </button>
+            <span class="pill-counter" id="debtCountTag">3 Liabilities Registered</span>
+          </div>
+        </div>
+
+        <!-- Live Borrowing Power Feedback Card -->
+        <div class="capacity-feedback-card" id="capacityFeedbackCard">
+          <div class="feedback-icon">💡</div>
+          <div class="feedback-content">
+            <strong id="feedbackTitle">Borrowing Power Expansion Loop:</strong>
+            <span id="feedbackText">Retiring your highest-APR debt ($110/mo) will free $110 in RACM, increasing safe credit capacity by +$330 under the 3.0x multiplier.</span>
+          </div>
         </div>
 
         <div class="table-container">
